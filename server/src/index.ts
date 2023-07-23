@@ -4,7 +4,9 @@ import { Server } from 'socket.io';
 import helmet from 'helmet';
 import cors from 'cors';
 import authRouter from './routers/authRouter';
+import dotenv from 'dotenv';
 
+dotenv.config();
 const app = express();
 
 const server = http.createServer(app);
