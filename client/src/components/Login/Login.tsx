@@ -28,9 +28,31 @@ function Login() {
           .min(6, 'Password too short!')
           .max(28, 'Password too long!'),
       })}
-      onSubmit={(values, actions) => {
+      onSubmit={(values: any, actions: any) => {
         alert(JSON.stringify(values, null, 2));
         actions.resetForm();
+        fetch('http://localhost:4000/auth/login', {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(values),
+        })
+          .catch((err: Error) => {
+            console.error(err);
+            return;
+          })
+          .then((res) => {
+            if (!res || !res.ok || res.status >= 400) {
+              return;
+            }
+            return res.json();
+          })
+          .then((data) => {
+            if (!data) return;
+            console.log(data);
+          });
       }}
     >
       <VStack
