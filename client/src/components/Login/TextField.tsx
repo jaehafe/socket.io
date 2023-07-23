@@ -11,8 +11,6 @@ type TextFieldProps = FieldHookConfig<string> & {
 };
 
 function TextField({ label, ...props }: any) {
-  console.log('props>>>', props);
-
   const [field, meta] = useField(props);
 
   const isInvalid = meta.touched && meta.error ? true : false;
